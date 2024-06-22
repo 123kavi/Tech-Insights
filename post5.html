@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guarding the Gates: Authentication and Authorization in Microservices</title>
+    <!-- Box-icons -->
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.0/css/boxicons.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: hsl(0, 0%, 4%);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1500px;
+            margin: auto;
+            padding: 0 20px;
+            overflow: hidden;
+        }
+
+        header {
+            background-color: #343a40;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        header .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        header .login {
+            font-size: 1.1rem;
+            color: #007bff;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        .home {
+            background-color: hsl(0, 0%, 4%);
+            color: #fff;
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .home h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .home-subtitle {
+            font-size: 1.5rem;
+        }
+
+        .about {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 80px 0;
+        }
+
+        .about .content {
+            flex: 1;
+            padding: 0 20px;
+        }
+
+        .about .content h2 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .about .content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #666;
+        }
+
+        .about .image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .about .image img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-filter {
+            text-align: center;
+            padding: 20px 0;
+            background-color:  hsl(0, 0%, 4%);
+            margin-bottom: 20px;
+        }
+
+        .filter-item {
+            cursor: pointer;
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 1.2rem;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .filter-item:hover,
+        .filter-item.active-filter {
+            background-color: #007bff;
+        }
+
+        .post {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .post-box {
+            width: calc(33.33% - 20px);
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .post-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .post-img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .category {
+            font-size: 1rem;
+            color: #007bff;
+            margin-bottom: 5px;
+        }
+
+        .post-title {
+            font-size: 1.5rem;
+            color: #333;
+            text-decoration: none;
+            margin-bottom: 10px;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .post-title:hover {
+            color: #007bff;
+        }
+
+        .post-date {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .post-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+        }
+
+        .profile-img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .profile-name {
+            font-size: 1rem;
+            color: #333;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+  
+
+    <section class="home">
+        <div class="container">
+            <h2>Guarding the Gates: Authentication and Authorization in Microservices</h2>
+            <p class="home-subtitle">Ensuring Secure Access in Microservices Architecture</p>
+        </div>
+    </section>
+
+    <section class="about">
+        <div class="container">
+            <div class="content">
+                <h2>Understanding Authentication and Authorization</h2>
+                <p>
+                    In the realm of microservices, authentication verifies the identity of users or services, while authorization determines their access permissions. Learn about common authentication methods like username/password, API keys, and tokens (e.g., JWT), and explore how authorization through roles and permissions ensures secure microservices architecture.
+                </p>
+                <a href="#" class="btn2">Read More</a>
+            </div>
+            <div class="image">
+                <img src="images/authentication.jpg" alt="Authentication and Authorization" class="fitBg">
+            </div>
+        </div>
+    </section>
+
+    <div class="post-filter">
+        <div class="container">
+            <span class="filter-item active-filter" onclick="filterPosts('all')">All</span>
+            <span class="filter-item" onclick="filterPosts('auth')">Authentication</span>
+            <span class="filter-item" onclick="filterPosts('authz')">Authorization</span>
+            <span class="filter-item" onclick="filterPosts('example')">Real-World Example</span>
+        </div>
+    </div>
+
+    <div class="post container" id="post-container">
+        <!-- Post 1 -->
+        <div class="post-box auth">
+            <img src="images/post1.jpg" alt="Post 1" class="post-img">
+            <h2 class="category">Authentication</h2>
+            <a href="#" class="post-title">Exploring JWT as a Secure Authentication Method</a>
+            <span class="post-date">June 1, 2024</span>
+            <p class="post-description">Learn how JSON Web Tokens (JWT) provide a secure and efficient way to authenticate users in microservices architecture.</p>
+            <div class="profile">
+                <img src="images/profile.jpg" alt="Profile" class="profile-img">
+                <span class="profile-name">John Doe</span>
+            </div>
+        </div>
+
+        <!-- Post 2 -->
+        <div class="post-box authz">
+            <img src="images/post2.jpg" alt="Post 2" class="post-img">
+            <h2 class="category">Authorization</h2>
+            <a href="#" class="post-title">Implementing Role-Based Access Control (RBAC)</a>
+            <span class="post-date">June 5, 2024</span>
+            <p class="post-description">Discover how Role-Based Access Control (RBAC) ensures granular access control in microservices, defining permissions based on user roles.</p>
+            <div class="profile">
+                <img src="images/profile.jpg" alt="Profile" class="profile-img">
+                <span class="profile-name">Jane Smith</span>
+            </div>
+        </div>
+
+        <!-- Post 3 -->
+        <div class="post-box example">
+            <img src="images/post3.jpg" alt="Post 3" class="post-img">
+            <h2 class="category">Real-World Example</h2>
+            <a href="#" class="post-title">Securing a Social Network Platform with Microservices</a>
+            <span class="post-date">June 10, 2024</span>
+            <p class="post-description">Explore how a social network platform leverages microservices for secure authentication and authorization, protecting user data and interactions.</p>
+            <div class="profile">
+                <img src="images/profile.jpg" alt="Profile" class="profile-img">
+                <span class="profile-name">Emily Rogers</span>
+            </div>
+        </div>
+    </div>
+
+ 
+    <script>
+        function filterPosts(category) {
+            const posts = document.querySelectorAll('.post-box');
+            posts.forEach(post => {
+                const postCategory = post.classList;
+                if (category === 'all' || postCategory.contains(category)) {
+                    post.style.display = 'block';
+                } else {
+                    post.style.display = 'none';
+                }
+            });
+
+            // Toggle active filter class
+            const filters = document.querySelectorAll('.filter-item');
+            filters.forEach(filter => {
+                filter.classList.remove('active-filter');
+                if (filter.getAttribute('onclick').includes(category)) {
+                    filter.classList.add('active-filter');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
